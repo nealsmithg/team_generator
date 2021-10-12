@@ -8,11 +8,6 @@ const { inherits } = require("util");
 
 function init() {
     const manager = new Manager();
-    async.series({
-        function(callback){
-        manager.getName();
-        }
-    })
     manager.getName();
     manager.getId();
     manager.getEmail();
