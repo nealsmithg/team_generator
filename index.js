@@ -3,6 +3,7 @@ const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const template = require("./src/template")
 const { inherits } = require("util");
 const Employee = require("./lib/Employee");
 const employees = []
@@ -43,7 +44,7 @@ function createEmployee(){
     }else if(response.type == "Intern"){
         createIntern();
     }else{
-
+        createWeb();
     }
     })
 };
@@ -55,7 +56,7 @@ function createEngineer(){
 
     inquirer
     .prompt(startQuestions)
-    .then((response) => {const engineer = new Engineer(response.name, response.id, response.email, response.gihub)
+    .then((response) => {const engineer = new Engineer(response.name, response.id, response.email, response.github)
         employees.push(engineer)
         createEmployee();
     })
@@ -71,6 +72,14 @@ function createIntern(){
     .then((response) => {const intern = new Intern(response.name, response.id, response.email, response.school)
         employees.push(intern)
         createEmployee();
+    })
+}
+
+function createWeb(){
+    // const webpage = template.head;
+    employees.forEach(element => {
+        const card = new template.Card(element.getName(), element.getRole(),element.getId(), element.getEmail(),Object.entries(element)[3][0], Object.entries(element)[3][1])
+        
     })
 }
 
