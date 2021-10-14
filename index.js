@@ -81,24 +81,28 @@ function createWeb(){
         const card = new template.Card(element.getName(), element.getRole(),element.getId(), element.getEmail(),Object.entries(element)[3][0], Object.entries(element)[3][1]);
         body = body.concat(card.getBody());
         });
-        fs.writeFile(`myteam.html`, template.head.concat(body.concat(template.foot)), function(err) {
+        fs.writeFile(`dist/myteam.html`, template.head.concat(body.concat(template.foot)), function(err) {
             if (err) throw err;
             console.log("created!");
     })
 }
 
-function init() {
-    startQuestions.push({type: "input",
-    message: "What is the employee's office number?",
-    name: "office"})
+// function init() {
+//     startQuestions.push({type: "input",
+//     message: "What is the employee's office number?",
+//     name: "office"})
 
-    inquirer
-    .prompt(startQuestions)
-    .then((response) => {const manager = new Manager(response.name, response.id, response.email, response.office)
-        employees.push(manager);
-        createEmployee();
-    })
-};
+//     inquirer
+//     .prompt(startQuestions)
+//     .then((response) => {const manager = new Manager(response.name, response.id, response.email, response.office)
+//         employees.push(manager);
+//         createEmployee();
+//     })
+// };
 
+function init(){
+    const employee = new Employee("john", 8, "jdoe@gmail.com");
+    console.log(employee)
+}
 
 init();
