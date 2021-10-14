@@ -3,12 +3,33 @@ const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-const template = require("./src/template")
-const { inherits } = require("util");
-const Employee = require("./lib/Employee");
-const employees = []
+const template = require("./src/template");
+const employees = [];
 
-const startQuestions = [
+const managerQuestions = [
+    {
+        type: "input",
+        message: "What is the Manager's name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is the Manager's ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is the Manager's Email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is the Manager's office number?",
+        name: "office"
+    }
+];
+
+const engineerQuestions = [
     {
         type: "input",
         message: "What is the employee's name?",
@@ -23,6 +44,34 @@ const startQuestions = [
         type: "input",
         message: "What is the employee's Email?",
         name: "email"
+    },
+    {
+        type: "input",
+        message: "What is the employee's Github username?",
+        name: "github"
+    }
+];
+
+const internQuestions = [
+    {
+        type: "input",
+        message: "What is the employee's name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is the employee's ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is the employee's Email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is the employee's school?",
+        name: "school"
     }
 ];
 
@@ -33,7 +82,7 @@ const employeeType = [
         name: "type",
         choices: ["Engineer", "Intern", "No more"]
     }
-]
+];
 
 function createEmployee(){
     inquirer
@@ -50,30 +99,22 @@ function createEmployee(){
 };
 
 function createEngineer(){
-    startQuestions.push({type: "input",
-    message: "What is the employee's Github username?",
-    name: "github"})
-
     inquirer
-    .prompt(startQuestions)
+    .prompt(engineerQuestions)
     .then((response) => {const engineer = new Engineer(response.name, response.id, response.email, response.github)
         employees.push(engineer)
         createEmployee();
     })
-}
+};
 
 function createIntern(){
-    startQuestions.push({type: "input",
-    message: "What is the employee's school?",
-    name: "school"})
-
     inquirer
-    .prompt(startQuestions)
+    .prompt(internQuestions)
     .then((response) => {const intern = new Intern(response.name, response.id, response.email, response.school)
         employees.push(intern)
         createEmployee();
     })
-}
+};
 
 function createWeb(){
     let body = "";
@@ -85,24 +126,15 @@ function createWeb(){
             if (err) throw err;
             console.log("created!");
     })
-}
+};
 
-// function init() {
-//     startQuestions.push({type: "input",
-//     message: "What is the employee's office number?",
-//     name: "office"})
-
-//     inquirer
-//     .prompt(startQuestions)
-//     .then((response) => {const manager = new Manager(response.name, response.id, response.email, response.office)
-//         employees.push(manager);
-//         createEmployee();
-//     })
-// };
-
-function init(){
-    const employee = new Employee("john", 8, "jdoe@gmail.com");
-    console.log(employee)
-}
+function init() {
+    inquirer
+    .prompt(managerQuestions)
+    .then((response) => {const manager = new Manager(response.name, response.id, response.email, response.office)
+        employees.push(manager);
+        createEmployee();
+    })
+};
 
 init();
