@@ -14,7 +14,7 @@ const head = `<!DOCTYPE html>
 class Card {
     constructor(name, title, id, email, other, value){
     
-    const body =`<ul class="list-group shadow m-2">
+    this.body =`<ul class="list-group shadow m-2">
     <li class="list-group-item active" aria-current="true">${name}<br>${title}</li>
     <div class="p-4 bg-info bg-gradient">
     <li class="list-group-item">ID: ${id}</li>
@@ -22,8 +22,12 @@ class Card {
     <li class="list-group-item">${other}: ${value}</li>
     </div>
     </ul>`
-}
-}
+    }
+
+    getBody(){
+      return this.body;
+    };
+};
 
 
 const foot = `

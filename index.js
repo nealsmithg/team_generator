@@ -76,10 +76,14 @@ function createIntern(){
 }
 
 function createWeb(){
-    // const webpage = template.head;
+    let body = "";
     employees.forEach(element => {
-        const card = new template.Card(element.getName(), element.getRole(),element.getId(), element.getEmail(),Object.entries(element)[3][0], Object.entries(element)[3][1])
-        
+        const card = new template.Card(element.getName(), element.getRole(),element.getId(), element.getEmail(),Object.entries(element)[3][0], Object.entries(element)[3][1]);
+        body = body.concat(card.getBody());
+        });
+        fs.writeFile(`myteam.html`, template.head.concat(body.concat(template.foot)), function(err) {
+            if (err) throw err;
+            console.log("created!");
     })
 }
 
